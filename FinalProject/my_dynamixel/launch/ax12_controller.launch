@@ -1,0 +1,4 @@
+<launch>
+  <node name="ax12_controller" pkg="my_dynamixel" type="ax12_controller.py"
+        required="true" output="screen"/>
+</launch>

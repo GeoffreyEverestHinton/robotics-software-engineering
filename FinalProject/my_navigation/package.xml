@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>my_navigation</name>
+  <version>0.0.0</version>
+  <description>导航、视觉目标追踪一体化功能包</description>
+  <maintainer email="turing@todo.com">turing</maintainer>
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- 与CMakeLists一一对应所有ROS依赖 -->
+  <depend>rospy</depend>
+  <depend>roscpp</depend>
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>cv_bridge</depend>
+  <depend>move_base_msgs</depend>
+  <depend>tf</depend>
+</package>

@@ -1,0 +1,21 @@
+# 5x AX-12A Dynamixel Servo Configuration
+# Protocol 1.0, 1,000,000 baud, /dev/ttyUSB0
+joint1:
+  ID: 1
+  Return_Delay_Time: 0
+
+joint2:
+  ID: 2
+  Return_Delay_Time: 0
+
+joint3:
+  ID: 3
+  Return_Delay_Time: 0
+
+joint4:
+  ID: 4
+  Return_Delay_Time: 0
+
+joint5:
+  ID: 5
+  Return_Delay_Time: 0

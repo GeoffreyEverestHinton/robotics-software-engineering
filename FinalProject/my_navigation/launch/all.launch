@@ -1,0 +1,20 @@
+<launch>
+  <!-- 启动TurtleBot底盘基础驱动 -->
+  <include file="$(find turtlebot_bringup)/launch/minimal.launch" />
+  <!-- 启动深度相机3D传感器 -->
+  <include file="$(find turtlebot_bringup)/launch/3dsensor.launch" />
+  <!-- 启动AX12舵机控制器 -->
+  <include file="$(find my_dynamixel)/launch/ax12_controller.launch" />
+  <!-- AMCL定位导航，加载本地地图文件 -->
+  <include file="$(find turtlebot_navigation)/launch/amcl_demo.launch">
+    <arg name="map_file" value="/home/turing/catkin_ws/src/my_home_map.yaml" />
+  </include>
+  <!-- 指定move_base使用TEB本地规划器 -->
+  <param name="move_base/base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
+  <!-- 加载TEB规划器参数，命名空间move_base -->
+  <rosparam file="$(find my_navigation)/config/teb_params.yaml" command="load" ns="move_base" />
+  <!-- 启动RViz并加载预设可视化配置 -->
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find my_navigation)/rviz/my_map_config.rviz" />
+  <!-- 启动自定义业务脚本all1.sh，控制台输出日志 -->
+  <node pkg="my_navigation" type="all1.sh" name="all1" output="screen" cwd="node"/>
+</launch>

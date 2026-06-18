@@ -1,0 +1,22 @@
+TebLocalPlannerROS:
+  odom_topic: odom
+  map_frame: map
+  base_frame: base_footprint
+
+  # TurtleBot 速度
+  max_vel_x: 0.3
+  max_vel_x_backwards: 0.15
+  max_vel_theta: 0.7
+
+  acc_lim_x: 0.3
+  acc_lim_theta: 0.5
+
+  # 避障安全距离
+  min_obstacle_dist: 0.22
+  inflation_dist: 0.35
+  include_dynamic_obstacles: true
+
+  # TurtleBot 差速底盘
+  holonomic_robot: false
+  allow_init_with_backwards_motion: true
+

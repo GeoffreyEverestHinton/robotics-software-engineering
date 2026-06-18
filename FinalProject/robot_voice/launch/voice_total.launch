@@ -1,0 +1,9 @@
+<launch>
+  <!-- 1. 语音识别 -->
+  <node pkg="robot_voice" type="iat_publish" name="iat_node" output="screen"/>
+  <!-- 2. 语音合成 -->
+  <node pkg="robot_voice" type="tts_subscribe" name="tts_node" output="screen"/>
+  <!-- 3. 指令解析脚本 -->
+  <node pkg="robot_voice" type="voice_cmd.py" name="cmd_node" output="screen"/>
+</launch>
+

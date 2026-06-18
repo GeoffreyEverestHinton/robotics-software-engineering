@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>robot_voice</name>
+  <version>1.0.0</version>
+  <description>ROS机器人语音交互功能包，包含麦克风录音、语音识别、TTS语音播报、语音指令解析</description>
+
+  <maintainer email="liu.fuzhi@bingda-robot.com">lfz</maintainer>
+  <license>MIT</license>
+
+  <!-- 编译工具依赖 -->
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- ROS核心依赖 -->
+  <depend>roscpp</depend>
+  <depend>rospy</depend>
+  <depend>std_msgs</depend>
+
+  <!-- 系统音频依赖ALSA（录音底层alsa/asoundlib） -->
+  <build_depend>libasound2-dev</build_depend>
+  <exec_depend>libasound2</exec_depend>
+
+  <export>
+    <build_type>catkin</build_type>
+  </export>
+</package>

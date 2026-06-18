@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>my_dynamixel</name>
+  <version>0.0.0</version>
+  <description>Dynamixel舵机机械臂控制ROS功能包</description>
+
+  <maintainer email="turing@163.com">turing</maintainer>
+  <license>MIT</license>
+
+  <!-- 编译工具依赖 -->
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- 统一依赖：dynamixel_workbench_controllers 和 CMakeLists 保持一致 -->
+  <depend>dynamixel_workbench_controllers</depend>
+  <depend>roscpp</depend>
+  <depend>rospy</depend>
+  <depend>std_msgs</depend>
+
+  <export>
+    <!-- 导出URDF/launch资源，RViz可直接识别 -->
+    <build_type>catkin</build_type>
+  </export>
+</package>
