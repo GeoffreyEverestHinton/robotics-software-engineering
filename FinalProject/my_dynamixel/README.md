@@ -1,7 +1,7 @@
 # my\_dynamixel 机械臂舵机控制使用手册
 
 
-## 一、硬件串口规则（重要固定规范）
+## 一、硬件串口规则
 
 ### 1\.1 查看USB串口设备
 
@@ -31,17 +31,15 @@ ls /dev/ttyUSB*
 |joint4|4|腕部俯仰关节|
 |joint5|5|末端夹爪关节|
 
-**注意**：夹爪 joint5 控制逻辑与视觉左右逻辑相反，脚本逻辑正常，为硬件安装方向导致。
+## 三、完整启动流程
 
-## 三、完整启动流程（多终端分步启动）
-
-### 终端1：启动ROS核心（常驻）
+### 终端1：启动ROS核心
 
 ```Plain Text
 roscore
 ```
 
-### 终端2：启动舵机控制器（常驻）
+### 终端2：启动舵机控制器
 
 ```Plain Text
 source ~/catkin_ws/devel/setup.bash
@@ -58,13 +56,13 @@ source ~/catkin_ws/devel/setup.bash
 
 ## 四、舵机状态查看指令
 
-读取当前机械臂所有关节角度（单次打印）：
+读取当前机械臂所有关节角度：
 
 ```Plain Text
 rostopic echo /joint_states -n 1
 ```
 
-## 五、基础标准舵机控制指令（基础限位值）
+## 五、基础标准舵机控制指令
 
 ### 5\.1 joint5 夹爪控制
 
@@ -142,107 +140,16 @@ rostopic pub -1 /command sensor_msgs/JointState "{name: ['joint2'], position: [1
 rostopic pub -1 /command sensor_msgs/JointState "{name: ['joint1'], position: [0.0]}"
 ```
 
-## 六、实际调试精准点位指令（工程可用）
 
-适配真机调试最优角度，替代基础限位值
+## 六、Python 功能脚本使用说明
 
-### 6\.1 joint5 夹爪精准控制
-
-最大张开：
-
-```Plain Text
-rostopic pub -1 /command sensor_msgs/JointState "{name: ['joint5'], position: [-0.6]}"
-```
-
-最小夹紧：
-
-```Plain Text
-rostopic pub -1 /command sensor_msgs/JointState "{name: ['joint5'], position: [0.3]}"
-```
-
-### 6\.2 joint4 腕部精准点位
-
-最上限位：
-
-```Plain Text
-rostopic pub -1 /command sensor_msgs/JointState "{name: ['joint4'], position: [-3.0]}"
-```
-
-最下限位：
-
-```Plain Text
-rostopic pub -1 /command sensor_msgs/JointState "{name: ['joint4'], position: [0.2]}"
-```
-
-### 6\.3 joint3 肘部精准点位
-
-最上限位：
-
-```Plain Text
-rostopic pub -1 /command sensor_msgs/JointState "{name: ['joint3'], position: [-0.92]}"
-```
-
-最下限位：
-
-```Plain Text
-rostopic pub -1 /command sensor_msgs/JointState "{name: ['joint3'], position: [2.8]}"
-```
-
-中间舒展位：
-
-```Plain Text
-rostopic pub -1 /command sensor_msgs/JointState "{name: ['joint3'], position: [1.5]}"
-```
-
-### 6\.4 joint2 肩部精准点位
-
-最上限位：
-
-```Plain Text
-rostopic pub -1 /command sensor_msgs/JointState "{name: ['joint2'], position: [1.31]}"
-```
-
-最下限位：
-
-```Plain Text
-rostopic pub -1 /command sensor_msgs/JointState "{name: ['joint2'], position: [-1.31]}"
-```
-
-### 6\.5 joint1 底座精准旋转点位
-
-正前方：
-
-```Plain Text
-rostopic pub -1 /command sensor_msgs/JointState "{name: ['joint1'], position: [-1.5]}"
-```
-
-正左方：
-
-```Plain Text
-rostopic pub -1 /command sensor_msgs/JointState "{name: ['joint1'], position: [-0.1]}"
-```
-
-正右方：
-
-```Plain Text
-rostopic pub -1 /command sensor_msgs/JointState "{name: ['joint1'], position: [0.3]}"
-```
-
-右前方：
-
-```Plain Text
-rostopic pub -1 /command sensor_msgs/JointState "{name: ['joint1'], position: [-2.4]}"
-```
-
-## 七、Python 功能脚本使用说明
-
-### 7\.1 脚本路径
+### 6\.1 脚本路径
 
 ```Plain Text
 cd ~/catkin_ws/src/my_dynamixel/scripts
 ```
 
-### 7\.2 赋予脚本执行权限（首次必须执行）
+### 6\.2 赋予脚本执行权限（首次必须执行）
 
 ```Plain Text
 chmod +x /home/turing/catkin_ws/src/my_dynamixel/scripts/Fully.py
@@ -252,7 +159,7 @@ chmod +x /home/turing/catkin_ws/src/my_dynamixel/scripts/capture.py
 chmod +x /home/turing/catkin_ws/src/my_dynamixel/scripts/laydown.py
 ```
 
-### 7\.3 脚本运行命令
+### 6\.3 脚本运行命令
 
 ```Plain Text
 # 全自动控制脚本
@@ -271,13 +178,11 @@ rosrun my_dynamixel capture.py
 rosrun my_dynamixel laydown.py
 ```
 
-## 八、关键注意事项
+## 七、关键注意事项
 
 - ROS 环境下 Python 脚本**必须添加执行权限**才可被 rosrun 调用
 
 - 所有控制指令发布话题为 **/command**，消息类型：**sensor\_msgs/JointState**
-
-- 夹爪运动方向与视觉左右相反，属于硬件安装问题，脚本逻辑无误
 
 - 启动顺序严格遵循：roscore → 控制器launch → 发布控制指令
 

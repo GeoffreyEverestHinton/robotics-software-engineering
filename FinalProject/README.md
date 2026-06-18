@@ -1,21 +1,24 @@
-# ROS机械臂语音导航机器人项目 README
+# IntelliCruise Fetch & Delivery项目 README
 
-# ROS机械臂语音导航机器人项目
+本项目基于 ros noetic 开发，实现**语音交互控制、五自由度机械臂运动、室内地图建图、自主导航避障、抓取放置全自动任务**一体化功能。
 
-本项目基于 ROS 开发，实现**语音交互控制、五自由度机械臂运动、室内地图建图、自主导航避障、抓取放置全自动任务**一体化机器人功能。
-
-项目仅开源**自主开发核心功能包**，官方公共依赖包无需上传，可直接通过环境配置复现。
+项目仅开源**自主开发核心功能包**，官方公共依赖包可直接通过环境配置复现。
 
 ## 📁 项目核心结构
 
-仓库仅包含本组编写、修改、适配的核心业务包，其余 TurtleBot 官方依赖、工具依赖均为公共开源包，无需上传。
+仓库仅包含本组编写、修改、适配的核心业务包，其余 TurtleBot 官方依赖、工具依赖均为公共开源包按需配置
 
 ```Plain Text
-src
+FinalProject
 ├── my_dynamixel      # 舵机机械臂控制核心包（点位控制、话题运动、初始化脚本）
 ├── my_navigation     # 机器人建图、定位、自主导航、仿真任务包
-└── robot_voice       # 全套语音交互包（语音识别、TTS播报、指令解析、总控调度）
-
+├── robot_voice       # 全套语音交互包（语音识别、TTS播报、指令解析、总控调度）
+├──CMakeLists.txt    #catkin编译配置文件
+├──Lab Report.pdf   #项目报告
+├──Presentation_Slides.pptx  #展示幻灯片
+├──README.md    #说明文档
+├──my_home_map.pgm   #室内地图灰度图片文件
+├──my_home_map.yaml   #地图配套参数配置文件
 ```
 
 ## 🔧 运行环境依赖
@@ -74,7 +77,7 @@ sudo pip3 install --upgrade pip
 sudo pip3 install pyserial threading
 ```
 
-### 4\. ROS公共依赖包（无需上传，环境安装自动适配）
+### 4\. ROS公共依赖包
 
 项目运行依赖以下官方公共包，本地环境安装即可，**不纳入仓库上传范围**：
 
@@ -88,20 +91,18 @@ sudo pip3 install pyserial threading
 
 - gazebo\_ros 仿真环境
 
-- **amcl、map\_server、move\_base 导航全套核心包**（定位、地图加载、路径规划、避障核心，标准ROS官方包，无需上传）
+- **amcl、map\_server、move\_base 导航全套核心包**（定位、地图加载、路径规划、避障核心）
 
 ## 📌 硬件设备要求
 
-- Dynamixel AX12 六自由度机械臂
+- Dynamixel AX12 五自由度机械臂
 
-- TurtleBot 移动底盘（支持仿真/实物双模式）
+- TurtleBot 移动底盘
 
 - 麦克风、音响（语音交互必备）
 
-- USB 串口设备（机械臂固定 ttyUSB0）
-
-## ⚙️ 项目编译步骤（全新环境复现）
-
+- USB 串口设备
+## ⚙️ 项目编译步骤
 ### 1\. 创建工作空间
 
 ```Plain Text
@@ -111,8 +112,7 @@ cd ~/catkin_ws/src
 
 ### 2\. 克隆核心源码
 
-将本仓库三个核心包放入 src 目录：`my_dynamixel`、`my_navigation`、`robot_voice`
-
+将本仓库放入 src 目录
 ### 3\. 赋予脚本执行权限（必须操作）
 
 ```Plain Text
