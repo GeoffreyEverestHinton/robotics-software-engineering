@@ -282,5 +282,3 @@ rosrun my_dynamixel laydown.py
 - 启动顺序严格遵循：roscore → 控制器launch → 发布控制指令
 
 - 新开终端务必执行 source 加载环境变量，否则找不到功能包
-
-> （注：部分内容可能由 AI 生成）
