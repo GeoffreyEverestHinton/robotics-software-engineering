@@ -6,6 +6,7 @@
 
 ## 机器人自主导航作业轨迹演示
 ![Navigation Path Trajectory](nav_path.png)
+
 上图展示机器人三点循环自主导航路线：起点→中间途经点→终点折返
 ---
 ## 📁 项目核心结构
